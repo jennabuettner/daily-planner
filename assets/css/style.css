@@ -6,6 +6,10 @@ body {
   flex-direction: column;
 }
 
+button span {
+  pointer-events: none;
+}
+
 textarea {
   background: transparent;
   border: none;
@@ -13,6 +17,10 @@ textarea {
   color: #000000;
   border-left: 1px solid black;
   padding: 10px;
+}
+
+.container { 
+  margin-bottom: 30px;
 }
 
 .jumbotron {

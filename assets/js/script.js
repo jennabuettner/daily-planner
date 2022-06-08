@@ -1,21 +1,79 @@
-//moment js feature for current day
+let hourNine = $("#9")
+const hourTen = $("#10")
+const hourEleven = $("#11")
+const hourTwelve = $("#12")
+const hourOne = $("#1")
+const hourTwo = $("#2")
+const hourThree = $("#3")
+const hourFour = $("#4")
+const hourFive = $("#5")
 
 let timeclock = function() {
     var time = moment().format('[It is currently ] dddd MMMM Do YYYY [ at ] hh:mm:ss a');
     document.querySelector('#currentDay').innerHTML = time;
 }
 
-timeclock()
-setInterval(timeclock, 1000)
-//moment().format("dddd MMMM Do")
-//capture variabes for user input
+
+
+
+
+
+
+
+
+
+function checkTime(timeArray) {
+    let currentHour = (moment().format('12'));
+    console.log("The current hour is " + currentHour);
+    for (let i = 0; i < timeArray.length; i++) {
+        let hourCheck = parseInt(timeArray[i].dataset.num)
+        if (currentHour == hourCheck) {
+            console.log("this is the current index: " + i);
+            console.log(hourCHeck + " is the current hour");
+            timeArray[i].className = "present col-10";
+        } else if (currentHour > hourCheck) {
+            timeArray[i].className = "past col-10";
+            console.log(hourCheck + " is in the past.");
+            console.log("this is the current index: " + i);
+        } else {
+            timeArray[i].className = "future col-10";
+            console.log("It is not yet " + hourCheck);
+            console.log("this is the current index: " + i);
+        }
+    }
+}
+
+
+
+// function colorTextArea() {
+//     if ('.hour' > timeOfDay) {
+//         textarea.setAttribute('background color', 'gray')
+//     }
+// }
+
+// timeclock()
+// setInterval(timeclock, 1000)
+// //capture variabes for user input
+// function checkTime() {
+// var timeOfDay = (".hour");
+// var hours = .getHours();
+//     if(hours >= 9 && hours <= 17){
+//         $(".hour").addClass("present");
+//     }
+//     else if (hours < 9) {
+//         $(".hour").addClass("past");
+//     } else {
+//         $(".hour").addClass("future");
+//     }
+// }
+
+// checkTime();
+
+
+
 
 //var current Day = $("#current-day")
-var currentDay = $("current-day")
 
-function currentDayUpdate() {
-
-}
 //add classes and event listners on all save buttons
 
 //function to determine whether or not time has already passed
@@ -58,4 +116,25 @@ function currentDayUpdate() {
 
 //event listener to save to local storage
 //key for each hour
-//$('.saveBtn).on('click', function to save to local storage)
+$('.time-block').on('click', 'button', saveToLocal)
+
+function saveToLocal(event) {
+var element = event.target
+var hour = $(element).siblings('.hour').attr('id')
+var task = $(element).siblings('textarea').val()
+
+localStorage.setItem(hour, task)
+console.log($(element).siblings('.hour').attr('id'))
+}
+
+function loadFromLocal() {
+var hourCount = 9
+
+while (hourCount <=17) {
+var taskText = localStorage.getItem(hourCount)
+console.log(taskText)
+hourCount ++;
+}
+}
+
+loadFromLocal()
